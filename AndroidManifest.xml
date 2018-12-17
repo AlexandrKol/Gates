@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.accesshouse.kostikovo"
+    android:versionCode="16"
+    android:versionName="3.0.9" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="28" />
+ <uses-permission android:name="android.permission.INTERNET"/>
+
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+         android:label="@string/app_name"
+        android:name="com.accesshouse.kostikovo.App"
+        android:theme="@style/AppTheme" >
+      
+        
+          <activity android:name="com.accesshouse.kostikovo.AllMenu"   
+              
+               android:theme="@android:style/Theme.Dialog"
+              android:excludeFromRecents="true" />
+            
+             <activity android:name="com.accesshouse.common.Selected" />
+          <activity  android:name="com.accesshouse.kostikovo.PermissionStart" 
+            
+              android:screenOrientation="portrait" >
+             
+               <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> 
+              
+          </activity>
+        <activity android:name="TelephonyM" android:screenOrientation="portrait"
+           android:permission="android.permission.WRITE_SMS" 
+            >
+            
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />                
+                <action android:name="android.intent.action.SENDTO" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+                <data android:scheme="mms" />
+                <data android:scheme="mmsto" />
+            </intent-filter>
+        </activity>
+<activity android:name="a.permmission6.mActivityResultSubscriber"></activity>
+<receiver android:name="com.accesshouse.kostikovo.ReciveSMS">
+    <intent-filter  android:priority="1000">
+        <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+    </intent-filter>
+</receiver> 
+       
+<receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.example.gcm" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="com.example.gcm" />
+            </intent-filter>
+        </receiver>
+        
+     <service
+            android:name="com.accesshouse.kostikovo.NotificationsListenerService"
+            android:exported="false" >
+        <intent-filter>
+            <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        </intent-filter></service> 
+        <service android:name="com.accesshouse.kostikovo.RegistrationService"
+            android:exported="false" />
+      |<!--   <service android:name=".MyFirebaseMessagingService">
+            <intent-filter  android:priority="-500">
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>  -->
+      <service
+            android:name="com.accesshouse.kostikovo.NotificationsRemoveService"
+            android:exported="false" />
+    </application>
+
+</manifest>
